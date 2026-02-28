@@ -1,0 +1,102 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Barmaja",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#functions"
+    },
+    {
+      "include": "#variables"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.barmaja",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.barmaja",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.barmaja",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.barmaja",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.barmaja",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.barmaja",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.barmaja",
+          "match": "\\b\\d+(\\.\\d+)?\\b"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.barmaja",
+          "match": "\\b(دع|ثابت|متغير|دالة|إذا|وإلا|لكل|طالما|أرجع|صنف|هذا|جديد|استورد|صدر)\\b"
+        },
+        {
+          "name": "constant.language.barmaja",
+          "match": "\\b(صحيح|خطأ|فارغ|غير_معرف)\\b"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function.barmaja",
+          "match": "\\b([a-zA-Z_\\u0600-\\u06FF][a-zA-Z0-9_\\u0600-\\u06FF]*)(?=\\s*\\()"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.barmaja",
+          "match": "\\b[a-zA-Z_\\u0600-\\u06FF][a-zA-Z0-9_\\u0600-\\u06FF]*\\b"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.barmaja"
+}
