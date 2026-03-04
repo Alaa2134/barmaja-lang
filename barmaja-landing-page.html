@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لغة بَرمَجة - البديل العربي الكامل لـ JavaScript</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            direction: rtl;
+            text-align: right;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Arial';
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row-reverse;
+        }
+
+        nav .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            flex-direction: row-reverse;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: row-reverse;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+
+        .features .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 60px;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Code Example Section */
+        .code-example {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .code-example .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .code-example h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 60px;
+            color: #333;
+        }
+
+        .code-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 30px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+        }
+
+        .code-block h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .download .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .download h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .download p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .download-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: row-reverse;
+        }
+
+        .download-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-width: 250px;
+            transition: all 0.3s;
+        }
+
+        .download-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .download-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .download-card p {
+            font-size: 0.95em;
+            margin-bottom: 20px;
+        }
+
+        .download-card a {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .download-card a:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: #2d2d2d;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .code-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">🌟 بَرمَجة</div>
+            <ul>
+                <li><a href="#features">المميزات</a></li>
+                <li><a href="#code">أمثلة</a></li>
+                <li><a href="#download">التحميل</a></li>
+                <li><a href="https://github.com/Alaa2134/barmaja-lang" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>🚀 لغة بَرمَجة</h1>
+            <p>البديل العربي الكامل لـ JavaScript</p>
+            <p style="font-size: 1.1em; opacity: 0.9;">برمج بالعربية، شغّل في أي مكان</p>
+            <div class="cta-buttons">
+                <a href="barmaja-playground-rtl.html" class="btn btn-primary">🎮 جرّب الآن</a>
+                <a href="#download" class="btn btn-secondary">📥 حمّل الآن</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>✨ المميزات</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>سهولة التعلم</h3>
+                    <p>كلمات مفتاحية عربية مألوفة تجعل البرمجة أسهل للمبتدئين العرب</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>قوة JavaScript</h3>
+                    <p>تستخدم قوة JavaScript الكاملة، مما يعني يمكنك بناء أي شيء</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>تشغيل في المتصفح</h3>
+                    <p>شغّل الكود مباشرة في صفحات HTML دون الحاجة لأدوات معقدة</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>منهج تعليمي</h3>
+                    <p>كتاب شرح شامل مع أمثلة عملية وصور توضيحية</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>إضافة VS Code</h3>
+                    <p>تلوين كود، إكمال تلقائي، وتشغيل مباشر من المحرر</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>مكتبات معربة</h3>
+                    <p>دعم كامل للرياضيات، التاريخ، النصوص، و DOM بكلمات عربية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Example Section -->
+    <section class="code-example" id="code">
+        <div class="container">
+            <h2>💻 مقارنة الأكواد</h2>
+            <div class="code-comparison">
+                <div>
+                    <div class="code-block">
+                        <h4>بَرمَجة (عربي) ✨</h4>
+                        <pre>دالة ترحيب(اسم) {
+    أرجع 'مرحباً يا ' + اسم;
+}
+
+اطبع(ترحيب('علاء'));</pre>
+                    </div>
+                </div>
+                <div>
+                    <div class="code-block">
+                        <h4>JavaScript (إنجليزي)</h4>
+                        <pre>function greeting(name) {
+    return 'Hello ' + name;
+}
+
+console.log(greeting('Alaa'));</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <h2>📥 ابدأ الآن</h2>
+            <p>اختر الطريقة التي تناسبك</p>
+            <div class="download-links">
+                <div class="download-card">
+                    <h3>🎮 جرّب أولاً</h3>
+                    <p>لا تحتاج لتثبيت أي شيء، جرّب اللغة مباشرة في المتصفح</p>
+                    <a href="barmaja-playground-rtl.html">الملعب التفاعلي</a>
+                </div>
+                <div class="download-card">
+                    <h3>📖 اقرأ الكتاب</h3>
+                    <p>كتاب شامل يشرح اللغة من الصفر إلى الاحتراف</p>
+                    <a href="barmaja_book_school_curriculum_rtl.pdf" download>تحميل الكتاب</a>
+                </div>
+                <div class="download-card">
+                    <h3>🛠️ ثبّت الإضافة</h3>
+                    <p>ثبّت إضافة VS Code للحصول على تجربة احترافية</p>
+                    <a href="barmaja-extension.vsix" download>تحميل VSIX</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>🔧 صُنعت بـ ❤️ من قِبل <strong>علاء صابر</strong></p>
+            <p>جميع الحقوق محفوظة © 2026 | <a href="https://github.com/Alaa2134/barmaja-lang" target="_blank">GitHub</a></p>
+            <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">لغة بَرمَجة هي مشروع مفتوح المصدر يهدف إلى تسهيل تعلم البرمجة للعرب</p>
+        </div>
+    </footer>
+</body>
+</html>

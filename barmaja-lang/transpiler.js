@@ -23,22 +23,63 @@ const keywordsMap = {
     'خطأ': 'false',
     'فارغ': 'null',
     'غير_معرف': 'undefined',
-    'اطبع': 'console.log' // إضافة دالة طباعة سهلة
+    'اطبع': 'console.log',
+    'وإلا إذا': 'else if',
+    'يمتد': 'extends',
+    'فائق': 'super',
+    // مكتبة الرياضيات
+    'الرياضيات': 'Math',
+    'عشوائي': 'random',
+    'جذر': 'sqrt',
+    'قوة': 'pow',
+    'تقريب': 'round',
+    'أرضية': 'floor',
+    'سقف': 'ceil',
+    'مطلق': 'abs',
+    'أقصى': 'max',
+    'أدنى': 'min',
+    'جيب': 'sin',
+    'جيب_تمام': 'cos',
+    'ظل': 'tan',
+    // مكتبة التاريخ
+    'التاريخ': 'Date',
+    'الآن': 'now',
+    'احصل_على_السنة': 'getFullYear',
+    'احصل_على_الشهر': 'getMonth',
+    'احصل_على_اليوم': 'getDate',
+    // مكتبة النصوص
+    'طول': 'length',
+    'إلى_نص': 'toString',
+    'إلى_كبير': 'toUpperCase',
+    'إلى_صغير': 'toLowerCase',
+    'تضمن': 'includes',
+    'استبدل': 'replace',
+    'قسم': 'split',
+    'قص': 'slice',
+    // مكتبة DOM
+    'المستند': 'document',
+    'النافذة': 'window',
+    'احصل_على_عنصر_بواسطة_المعرف': 'getElementById',
+    'استعلام_عن_عنصر': 'querySelector',
+    'استعلام_عن_عناصر': 'querySelectorAll',
+    'محتوى_نصي': 'textContent',
+    'محتوى_داخلي': 'innerHTML',
+    'عند_النقر': 'onclick',
+    'أضف_مستمع_حدث': 'addEventListener'
 };
 
 function transpile(code) {
     let transpiledCode = code;
-
-    // استبدال الكلمات المفتاحية
-    // نستخدم تعبيرات منتظمة لضمان استبدال الكلمات الكاملة فقط
-    for (const [arabic, english] of Object.entries(keywordsMap)) {
-        // نستخدم تعبيرات منتظمة تدعم اليونيكود لضمان استبدال الكلمات العربية الكاملة فقط
-        // بما أن \b لا تعمل بشكل جيد مع العربية، سنستخدم حدوداً مخصصة
+    
+    // ترتيب المعاملات من الأطول إلى الأقصر لتجنب التضارب
+    const sortedKeywords = Object.entries(keywordsMap).sort((a, b) => b[0].length - a[0].length);
+    
+    for (const [arabic, english] of sortedKeywords) {
         const regex = new RegExp(`(?<=^|[^\\p{L}\\p{N}_])${arabic}(?=[^\\p{L}\\p{N}_]|$)`, 'gu');
         transpiledCode = transpiledCode.replace(regex, english);
     }
-
+    
     return transpiledCode;
 }
 
-module.exports = { transpile };
+module.exports = { transpile, keywordsMap };

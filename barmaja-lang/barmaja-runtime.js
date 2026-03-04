@@ -24,12 +24,56 @@
         'خطأ': 'false',
         'فارغ': 'null',
         'غير_معرف': 'undefined',
-        'اطبع': 'console.log'
+        'اطبع': 'console.log',
+        'وإلا إذا': 'else if',
+        'يمتد': 'extends',
+        'فائق': 'super',
+        // مكتبة الرياضيات
+        'الرياضيات': 'Math',
+        'عشوائي': 'random',
+        'جذر': 'sqrt',
+        'قوة': 'pow',
+        'تقريب': 'round',
+        'أرضية': 'floor',
+        'سقف': 'ceil',
+        'مطلق': 'abs',
+        'أقصى': 'max',
+        'أدنى': 'min',
+        'جيب': 'sin',
+        'جيب_تمام': 'cos',
+        'ظل': 'tan',
+        // مكتبة التاريخ
+        'التاريخ': 'Date',
+        'الآن': 'now',
+        'احصل_على_السنة': 'getFullYear',
+        'احصل_على_الشهر': 'getMonth',
+        'احصل_على_اليوم': 'getDate',
+        // مكتبة النصوص
+        'طول': 'length',
+        'إلى_نص': 'toString',
+        'إلى_كبير': 'toUpperCase',
+        'إلى_صغير': 'toLowerCase',
+        'تضمن': 'includes',
+        'استبدل': 'replace',
+        'قسم': 'split',
+        'قص': 'slice',
+        // مكتبة DOM
+        'المستند': 'document',
+        'النافذة': 'window',
+        'احصل_على_عنصر_بواسطة_المعرف': 'getElementById',
+        'استعلام_عن_عنصر': 'querySelector',
+        'استعلام_عن_عناصر': 'querySelectorAll',
+        'محتوى_نصي': 'textContent',
+        'محتوى_داخلي': 'innerHTML',
+        'عند_النقر': 'onclick',
+        'أضف_مستمع_حدث': 'addEventListener'
     };
 
     function transpile(code) {
         let transpiledCode = code;
-        for (const [arabic, english] of Object.entries(keywordsMap)) {
+        const sortedKeywords = Object.entries(keywordsMap).sort((a, b) => b[0].length - a[0].length);
+        
+        for (const [arabic, english] of sortedKeywords) {
             const regex = new RegExp(`(?<=^|[^\\p{L}\\p{N}_])${arabic}(?=[^\\p{L}\\p{N}_]|$)`, 'gu');
             transpiledCode = transpiledCode.replace(regex, english);
         }
@@ -37,30 +81,25 @@
     }
 
     function runBarmaja() {
-        // البحث عن جميع وسوم script التي نوعها text/barmaja
         const scripts = document.querySelectorAll('script[type="text/barmaja"]');
-        
         scripts.forEach(script => {
             const code = script.textContent;
             const jsCode = transpile(code);
-            
-            // إنشاء وسم script جديد لتنفيذ الكود المترجم
             const newScript = document.createElement('script');
             newScript.textContent = jsCode;
             document.body.appendChild(newScript);
         });
     }
 
-    // تشغيل الكود عند تحميل الصفحة
     if (document.readyState === 'complete') {
         runBarmaja();
     } else {
         window.addEventListener('load', runBarmaja);
     }
 
-    // تصدير الوظيفة للاستخدام اليدوي إذا لزم الأمر
     window.Barmaja = {
         transpile: transpile,
-        run: runBarmaja
+        run: runBarmaja,
+        keywords: keywordsMap
     };
 })();
